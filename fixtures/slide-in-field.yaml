@@ -1,0 +1,14 @@
+/foo/bar:
+  value: original
+
+---
+
+patch:
+  - op: replace
+    path: /~1foo~1bar/value
+    value: replaced
+
+---
+
+/foo/bar:
+  value: replaced

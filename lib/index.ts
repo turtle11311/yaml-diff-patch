@@ -49,6 +49,9 @@ function traverse( root: ParsedNode, op: string, path: string ): ParsedPath
 
 	segments.forEach( ( segment, index ) =>
 	{
+		// escape ~1 with / and ~0 with ~, because the JSON patch uses
+		// ~1 and ~0 to escape slashes and tildes in the path.
+		segment = unescapePathComponent( segment );
 		if ( isYamlSeq( parent ) )
 			parent = parent.get( parseInt( segment ), true ) as
 				unknown as YAMLCollection;
